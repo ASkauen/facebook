@@ -1,0 +1,13 @@
+.absolute.right-16.top-14.w-max.bg-white.border
+  .grid.grid-rows-auto.gap-2.p-2
+    - current_user.notifications.each do |fr|
+      .hover:bg-gray-200
+        = link_to fr.sender do
+          .inline-flex.gap-3.p-2
+            = image_tag url_for(fr.sender.avatar_thumbnail("48")), class: "rounded"
+            %div
+              .text-md.flex-grow
+                #{fr.sender.first_name} wants to be friends
+              .inline-flex
+                = link_to "Accept", accept_friend_request_path(fr), method: :post,
+                class: "bg-blue-400 text-white px-2 rounded"

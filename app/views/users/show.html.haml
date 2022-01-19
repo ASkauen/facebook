@@ -1,0 +1,13 @@
+.bg-white.mt-36.mx-auto.rounded.shadow-lg.border-2.border-blue-300{class: "w-1/2"}
+  .bg-gray-50.border-b-2.border-gray-300
+    = render "profile", user: @user
+  .grid.grid-cols-3
+    %div
+      .text-2xl.font-medium.text-center.mt-10
+        Friends
+      = render "friends", user: @user
+    %div
+      = render "posts/new" if @user == current_user
+      = turbo_stream_from "posts"
+      #posts.mb-5
+        = render "posts/posts", posts: @user.posts.order_desc, user: current_user

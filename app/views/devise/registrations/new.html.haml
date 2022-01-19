@@ -1,0 +1,32 @@
+.text-center.bg-blue-400.py-5.px-3.mx-auto.mt-48.rounded{class: "w-max"}
+  %h2.text-4xl.font-bold.text-white Sign up
+  %hr.my-2
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    = render "devise/shared/error_messages", resource: resource
+    .field
+      = f.label :first_name, class: "text-white font-medium text-xl"
+      %br/
+      = f.text_field :first_name, autofocus: true, autocomplete: "first_name", class: "rounded px-3"
+    .field
+      = f.label :last_name, class: "text-white font-medium text-xl"
+      %br/
+      = f.text_field :last_name, autofocus: true, autocomplete: "last_name", class: "rounded px-3"
+    .field
+      = f.label :email, class: "text-white font-medium text-xl"
+      %br/
+      = f.email_field :email, autofocus: true, autocomplete: "email", class: "rounded px-3"
+    .field
+      = f.label :password, class: "text-white font-medium text-xl"
+      - if @minimum_password_length
+        %br
+        %em.text-white
+          (#{@minimum_password_length} characters minimum)
+      %br/
+      = f.password_field :password, autocomplete: "new-password", class: "rounded px-3"
+    .field
+      = f.label :password_confirmation, class: "text-white font-medium text-xl"
+      %br/
+      = f.password_field :password_confirmation, autocomplete: "new-password", class: "rounded px-3"
+    .actions.my-4
+      = f.submit "Sign up", class: "px-4 py-1 rounded bg-white hover:bg-gray-200 cursor-pointer"
+  = render "devise/shared/links"

@@ -1,0 +1,7 @@
+.grid.grid-rows-auto.px-3.py-2.rounded.mt-48.border.shadow.bg-white.mx-auto{class: "w-1/2"}
+  .text-4xl.font-medium.italic.text-blue-500.text-center.border-b.border-blue-200
+    Find friends
+  .grid.grid-rows-auto.mt-3
+    - strangers.each do |stranger|
+      %div
+        = render "users/user", user: stranger

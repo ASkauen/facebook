@@ -1,0 +1,11 @@
+= turbo_stream_from "posts"
+
+.grid.grid-cols-3
+  %div
+  %div
+    = render 'new'
+    #posts
+      = render "posts", posts: @posts.order_desc, user: current_user
+  %div#people
+    = render "users/strangers", strangers: @strangers
+

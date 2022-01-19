@@ -1,3 +1,11 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
+  resources :users, only: [:show, :update]
+  resources :posts
+  resources :friend_requests, only: [:create, :destroy] do
+    post "/accept", to: "friend_requests#accept", on: :member
+  end
+  root 'posts#index'
+  get "/auth/facebook/callback", to: "omniauth#facebook"
+  patch "/update_avatar/:id", to: "users#update_avatar", as: "update_avatar"
 end

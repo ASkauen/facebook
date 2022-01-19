@@ -1,0 +1,20 @@
+.relative.-top-14.-bottom-14
+  .inline-flex.w-full.justify-center
+    - if user == current_user
+      = form_with scope: :user, url: update_avatar_path, method: :patch, data: {controller: "avatar"}, id: "avatar-form" do |f|
+        = f.file_field :avatar, hidden: true, data: {action: "change->avatar#Submit"}
+        = f.label :avatar, class: "pointer-events-none" do
+          .group.cursor-pointer.rounded-full.pointer-events-auto
+            #{image_tag url_for(user.avatar_thumbnail("96")), class: "rounded-full justify-self-center border-2 border-blue-300"}
+            .text-transparent.group-hover:text-black.text-center.relative.bottom-14.h-0
+              Change
+    - else
+      = image_tag url_for(user.avatar_thumbnail("96")), class: "rounded-full border-2 border-blue-300"
+  .text-center.text-4xl.font-medium.text-gray-700.mt-5
+    = user.full_name
+  - if current_user.strangers.include?(user)
+    .text-center.mt-7
+      = turbo_stream_from "friend_requests"
+      #friend-button
+        = render "users/buttons/add_friend", friend_requests: current_user.request_recipients, user: user, sender: current_user
+  - else

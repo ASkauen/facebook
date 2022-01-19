@@ -1,0 +1,19 @@
+.text-center.bg-blue-400.py-5.px-3.mx-auto.mt-48.rounded{class: "w-max"}
+  %h2.text-4xl.font-bold.text-white Log in
+  %hr.my-2
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .field
+      = f.label :email, class: "text-white font-medium text-xl"
+      %br/
+      = f.email_field :email, autofocus: true, autocomplete: "email", class: "rounded px-3"
+    .field
+      = f.label :password, class: "text-white font-medium text-xl"
+      %br/
+      = f.password_field :password, autocomplete: "current-password", class: "rounded px-3"
+    - if devise_mapping.rememberable?
+      .field.text-white.my-4
+        = f.check_box :remember_me
+        = f.label :remember_me
+    .actions.mb-2
+      = f.submit "Log in", class: "px-4 py-1 rounded bg-white hover:bg-gray-200 cursor-pointer"
+  = render "devise/shared/links"
