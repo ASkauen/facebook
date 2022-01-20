@@ -10,14 +10,21 @@ class User < ApplicationRecord
   has_many :received_friend_requests, class_name: 'FriendRequest', foreign_key: :recipient_id, dependent: :destroy
   has_many :sent_friend_requests, class_name: 'FriendRequest', foreign_key: :sender_id, dependent: :destroy
   has_many :friendships, dependent: :destroy
-  has_many :friends, ->(user){ joins(:friendships).where("friendships.user_id = ? OR friendships.friend_id = ?", user.id, user.id) }, class_name: "User"
   has_one_attached :avatar, dependent: :destroy
-
   validates :avatar, blob: { content_type: :image }
   validates :email, uniqueness: true, presence: true
 
   before_create do
     set_avatar
+  end
+
+  def friends_with?(user)
+    friends.include?(user)
+  end
+
+  def friends
+    friendships = Friendship.where("friendships.user_id = ? OR friendships.friend_id = ?", self.id, self.id)
+    friendships.map {|f| f.user == self ? f.friend : f.user}
   end
 
   def strangers

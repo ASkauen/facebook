@@ -5,6 +5,5 @@ export default class extends Controller {
   clearInput() {
     const input = document.getElementById("post_body")
     input.value = ""
-    disableButton()
   }
 }

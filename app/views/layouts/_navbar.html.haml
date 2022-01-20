@@ -3,7 +3,9 @@
     = link_to "Fåcebook", root_path
   - if user_signed_in?
     = render "users/buttons/notifications"
-    = render "users/notifications"
+    = turbo_stream_from "notifications"
+    #notifications.hidden
+      = render "users/notifications", notifications: current_user.notifications
     .text-white.text-lg.mr-5
       = link_to "Sign out", destroy_user_session_path, method: :delete
     = link_to user_path(current_user) do

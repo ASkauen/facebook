@@ -10,5 +10,8 @@ application.register("avatar", AvatarController)
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
 
+import NotificationsController from "./notifications_controller.js"
+application.register("notifications", NotificationsController)
+
 import PostController from "./post_controller.js"
 application.register("post", PostController)
