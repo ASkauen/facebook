@@ -12,9 +12,6 @@
       = image_tag url_for(user.avatar_thumbnail("96")), class: "rounded-full border-2 border-blue-300"
   .text-center.text-4xl.font-medium.text-gray-700.mt-5
     = user.full_name
-  - if current_user.strangers.include?(user)
-    .text-center.mt-7
-      = turbo_stream_from "friend_requests"
-      #friend-button
-        = render "users/buttons/add_friend", friend_requests: current_user.request_recipients, user: user, sender: current_user
-  - else
+  .text-center.mt-7
+    = render "users/buttons/add_remove_friend", user: user, sender: current_user
+

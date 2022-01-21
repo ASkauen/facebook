@@ -1,6 +1,0 @@
-- if sender.friends_with?(user)
-- else
-  - if friend_requests.include?(user.id)
-    = link_to "Cancel friend request", friend_request_path(user), method: :delete, class: "px-3 py-1 text-gray-500 bg-gray-200 rounded shadow"
-  - else
-    = link_to "Add friend", friend_requests_path(id: user), method: :post, class: "bg-blue-400 px-3 py-2 text-white rounded shadow"

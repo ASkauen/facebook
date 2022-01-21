@@ -2,8 +2,8 @@
   .text-white.text-5xl.font-medium.italic.flex-grow
     = link_to "Fåcebook", root_path
   - if user_signed_in?
-    = render "users/buttons/notifications"
-    = turbo_stream_from "notifications"
+    #bell
+      = render "users/buttons/notifications", enable: current_user.notifications.any?
     #notifications.hidden
       = render "users/notifications", notifications: current_user.notifications
     .text-white.text-lg.mr-5

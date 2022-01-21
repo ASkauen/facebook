@@ -6,8 +6,8 @@ export default class extends Controller {
     let notifs = document.getElementById("notifications")
     let bell = document.getElementById("bell")
     window.addEventListener("click", function(e) {
-      console.log(getParents(e.target))
-      if(!getParents(e.target).includes(notifs) && e.target != bell){
+      console.log(e.target)
+      if(!getParents(e.target).includes(notifs) && !getParents(e.target).includes(bell) && (e.target).nodeName != "INPUT"){
         hideNotifications(notifs)
       }
     })
