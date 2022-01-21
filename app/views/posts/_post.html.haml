@@ -5,9 +5,8 @@
       = image_tag url_for(post.author.avatar_thumbnail), class: "rounded"
       .text-gray-700
         #{post.author.full_name}
-    - if post.author == current_user
-      %div.flex-grow
-      = link_to post_path(post), method: :delete do
-        = heroicon "trash", options: {class: "h-5 hover:text-red-600"}
+    %div.flex-grow
+    = link_to post_path(post), method: :delete, data: {controller: "reveal-for", "reveal-for-id-value": post.author.id} do
+      = heroicon "trash", options: {class: "h-5 hover:text-red-600"}
   .text-lg.text-gray-700
     = post.body

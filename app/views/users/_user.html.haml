@@ -1,5 +1,5 @@
 = link_to user_path(user) do
   .inline-flex.items-center.gap-3.w-full.px-3.py-1.rounded.hover:bg-gray-200
-    = image_tag(url_for(user.avatar_thumbnail("50")), class: "rounded-sm")
+    = image_tag(url_for(user.avatar_thumbnail("50")), class: "rounded-sm") if false # FIXME: I did not want to set up cloudinary
     .text-xl.flex-grow
       = user.full_name

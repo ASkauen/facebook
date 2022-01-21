@@ -15,3 +15,6 @@ application.register("notifications", NotificationsController)
 
 import PostController from "./post_controller.js"
 application.register("post", PostController)
+
+import RevealController from "./reveal_for_controller.js"
+application.register("reveal-for", RevealController)
