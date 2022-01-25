@@ -1,0 +1,12 @@
+.hover:bg-gray-200{id: dom_id(fr)}
+  = link_to fr.sender do
+    .inline-flex.gap-3.p-2.w-full
+      = image_tag url_for(fr.sender.avatar_thumbnail("48")), class: "rounded"
+      %div
+        .text-md.flex-grow
+          #{fr.sender.first_name} wants to be friends
+        .inline-flex.mx-auto
+          = link_to "Accept", accept_friend_request_path(fr, user: fr.recipient), method: :post,
+                    class: "bg-blue-400 text-white px-2 rounded hover:bg-blue-500 mx-3"
+          = link_to "Decline", friend_request_path(fr), method: :delete,
+                    class: "bg-gray-300 text-white px-2 rounded hover:bg-gray-400"

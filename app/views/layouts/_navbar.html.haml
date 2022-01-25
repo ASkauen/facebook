@@ -1,11 +1,9 @@
-.fixed.bg-blue-400.w-full.h-16.inline-flex.items-center.px-4.shadow.top-0
+.fixed.bg-blue-400.w-full.h-16.inline-flex.items-center.px-4.shadow.top-0.z-10
   .text-white.text-5xl.font-medium.italic.flex-grow
     = link_to "Fåcebook", root_path
   - if user_signed_in?
-    #bell
-      = render "users/buttons/notifications", enable: current_user.notifications.any?
-    #notifications.hidden
-      = render "users/notifications", notifications: current_user.notifications
+    - notifs = current_user.notifications
+    = render "users/notifications", recipient: current_user, enable: notifs.any?
     .text-white.text-lg.mr-5
       = link_to "Sign out", destroy_user_session_path, method: :delete
     = link_to user_path(current_user) do

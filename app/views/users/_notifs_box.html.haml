@@ -1,0 +1,9 @@
+.absolute.right-16.top-14.w-max.bg-white.border
+  - if recipient.notifications.any?
+    #notifications.grid.grid-rows-auto.gap-2.p-2
+      - recipient.notifications.each do |notif|
+        - if notif.class == FriendRequest
+          = render "users/friend_request", fr: notif
+  - else
+    .w-80.py-10.text-center.text-gray-400
+      No notifications

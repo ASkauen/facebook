@@ -1,19 +1,7 @@
-.absolute.right-16.top-14.w-max.bg-white.border
-  - if notifications.any?
-    .grid.grid-rows-auto.gap-2.p-2
-      - notifications.each do |fr|
-        .hover:bg-gray-200
-          = link_to fr.sender do
-            .inline-flex.gap-3.p-2.w-full
-              = image_tag url_for(fr.sender.avatar_thumbnail("48")), class: "rounded"
-              %div
-                .text-md.flex-grow
-                  #{fr.sender.first_name} wants to be friends
-                .inline-flex.mx-auto
-                  = link_to "Accept", accept_friend_request_path(fr, user: fr.recipient), method: :post,
-                  class: "bg-blue-400 text-white px-2 rounded hover:bg-blue-500 mx-3"
-                  = link_to "Decline", friend_request_path(fr), method: :delete,
-                  class: "bg-gray-300 text-white px-2 rounded hover:bg-gray-400"
-  - else
-    .w-80.py-10.text-center.text-gray-400
-      No notifications
+= turbo_stream_from "bell"
+= turbo_stream_from "notifications"
+#notifs
+  %dib{id: "bell#{recipient.id}"}
+    = render "users/buttons/bell", enable: enable
+  .hidden{id: "notifs-box#{recipient.id}"}
+    = render "users/notifs_box", recipient: recipient

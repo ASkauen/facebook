@@ -4,7 +4,7 @@
   %div
   %div
     = render 'new'
-    = render "posts", posts: @posts.order_desc, user: current_user
+    = render "posts", posts: @posts.order_desc
   %div#people
     = render "users/strangers", strangers: @strangers
 

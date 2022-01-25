@@ -1,0 +1,7 @@
+.flex.cursor-pointer{data: {controller: "notifications", action: "click->notifications#toggle"}}
+  = heroicon "bell",
+  options: {class: "h-7 p-1 mr-3 text-white #{"fill-current" if enable} pointer-events-none"},
+  variant: "outline"
+  - if enable
+    .text-yellow-400.absolute.ml-5.text-md
+      ●

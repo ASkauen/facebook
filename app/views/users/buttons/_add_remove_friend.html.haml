@@ -1,17 +1,17 @@
-- if sender.friends_with?(user)
-  = link_to "Remove friend", friendship_path(sender.friendship_with(user), user: user), method: :delete
+- if @friendship
+  = link_to "Remove friend", friendship_path(@friendship), method: :delete
 - else
-  - if sender.request_recipients.include?(user.id)
-    = link_to "Cancel friend request", friend_request_path(sender.request_to(user)), method: :delete, class: "px-3 py-1 text-gray-500 bg-gray-200 rounded shadow"
-  - elsif sender.request_senders.include?(user.id)
-    %div
-      - fr = sender.request_from(user)
-      .text-md.flex-grow.text-center
-        wants to be friends
-      .inline-flex.mx-auto
-        = link_to "Accept", accept_friend_request_path(id: fr, user: user), method: :post,
-                  class: "bg-blue-400 text-white px-2 rounded hover:bg-blue-500 mx-3"
-        = link_to "Decline", friend_request_path(fr), method: :delete,
-                  class: "bg-gray-300 text-white px-2 rounded hover:bg-gray-400"
+  - if @friend_request
+    - if @friend_request.sender != @user
+      = link_to "Cancel friend request", friend_request_path(@friend_request), method: :delete, class: "px-3 py-1 text-gray-500 bg-gray-200 rounded shadow"
+    - elsif @friend_request.sender == @user
+      %div
+        .text-md.flex-grow.text-center
+          wants to be friends
+        .inline-flex.mx-auto
+          = link_to "Accept", accept_friend_request_path(id: @friend_request, user: @user), method: :post,
+                    class: "bg-blue-400 text-white px-2 rounded hover:bg-blue-500 mx-3"
+          = link_to "Decline", friend_request_path(@friend_request), method: :delete,
+                    class: "bg-gray-300 text-white px-2 rounded hover:bg-gray-400"
   - else
-    = link_to "Add friend", friend_requests_path(id: user), method: :post, class: "bg-blue-400 px-3 py-2 text-white rounded shadow"
+    = link_to "Add friend", friend_requests_path(id: @user), method: :post, class: "bg-blue-400 px-3 py-2 text-white rounded shadow"

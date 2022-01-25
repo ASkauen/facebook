@@ -1,8 +1,0 @@
-%div{data: {controller: "notifications", action: "click->notifications#toggle"}}
-  .flex
-    = heroicon "bell",
-    options: {class: "h-7 p-1 mr-3 text-white #{"fill-current" if enable} cursor-pointer"},
-    variant: "outline"
-    - if enable
-      .text-yellow-400.absolute.ml-5.text-md
-        ●

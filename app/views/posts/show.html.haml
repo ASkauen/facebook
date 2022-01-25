@@ -1,0 +1,23 @@
+.grid.grid-rows-auto.border.rounded.p-3.shadow.gap-3.bg-white.mx-auto.mt-48{class: "w-1/2"}
+  .inline-flex.items-center
+    = link_to (controller_name == "users" ? "#" : user_path(@post.author)),
+      class: "inline-flex items-center gap-3 border-b w-max" do
+      = image_tag url_for(@post.author.avatar_thumbnail), class: "rounded"
+      .text-gray-700
+        #{@post.author.full_name}
+    %div.flex-grow
+    = link_to post_path(@post), method: :delete, data: {controller: "reveal-for", "reveal-for-id-value": @post.author.id} do
+      = heroicon "trash", options: {class: "h-5 hover:text-red-600"}
+  .text-lg.text-gray-700.border-b
+    = @post.body
+  = render "posts/buttons/like", post: @post
+  - if @post.likers.any?
+    .text-md.text-gray-600
+      Likers:
+    #likers.h-10.truncate.-my-3
+      - @likers.each do |l|
+        .text-sm
+          = link_to l.first_name, l, class: "hover:underline"
+    - if @post.likers.count > 2
+      #likers-button.shadow-blur-over.text-sm.text-blue-400.cursor-pointer.hover:text-blue-600{data: {controller: "show-more", action: "click->show-more#toggleLikers"}}
+        Show more...

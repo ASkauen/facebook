@@ -5,9 +5,10 @@
     %div
       .text-2xl.font-medium.text-center.mt-10
         Friends
-      .mx-3
-        = render "friends", user: @user
+      = turbo_stream_from "friends"
+      = render "friends", user: @user
     %div
       = render "posts/new" if @user == current_user
       .mb-5
+        = turbo_stream_from "posts"
         = render "posts/posts", posts: @user.posts.order_desc, user: current_user

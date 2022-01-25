@@ -1,0 +1,11 @@
+.inline-flex.text-sm.text-gray-500{id: "likers#{post.id}"}
+  - if post.likers.any?
+    - latest_liker = post.likers.order(created_at: :desc).last
+    = link_to latest_liker.first_name, latest_liker, class: "hover:underline mr-1"
+    - if post.likers.many?
+      .mr-1
+        = link_to post_path(post) do
+          .hover:underline
+            and #{post.likers.count - 1}
+            #{"other#{"s" if post.likers.count > 2}"}
+    likes this

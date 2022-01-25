@@ -1,0 +1,4 @@
+%div
+  = turbo_stream_from "likers"
+  = render "posts/likers", post: post
+  = render "posts/buttons/like", post: post

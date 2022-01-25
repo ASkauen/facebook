@@ -3,21 +3,23 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="notifications"
 export default class extends Controller {
   connect() {
-    let notifs = document.getElementById("notifications")
-    let bell = document.getElementById("bell")
+    let userId = document.querySelector('meta[name="user-id"]').content
+    let notifsBox = document.getElementById(`notifs-box${userId}`)
+    let notifs = document.getElementById("notifs")
     window.addEventListener("click", function(e) {
-      if(!getParents(e.target).includes(notifs) && !getParents(e.target).includes(bell) && (e.target).nodeName != "INPUT"){
-        hideNotifications(notifs)
+      if(!getParents(e.target).includes(notifs) && (e.target).nodeName != "INPUT"){
+        hideNotifications(notifsBox)
       }
     })
   }
 
   toggle() {
-    let notifs = document.getElementById("notifications")
-    if(Array.from(notifs.classList).includes("hidden")){
-      showNotifications(notifs)
+    let userId = document.querySelector('meta[name="user-id"]').content
+    let notifsBox = document.getElementById(`notifs-box${userId}`)
+    if(Array.from(notifsBox.classList).includes("hidden")){
+      showNotifications(notifsBox)
     }else{
-      hideNotifications(notifs)
+      hideNotifications(notifsBox)
     }
   }
 }

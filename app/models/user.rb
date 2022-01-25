@@ -38,6 +38,10 @@ class User < ApplicationRecord
     friends_from_a + friends_from_b
   end
 
+  def has_liked?(post)
+    liked_posts.include?(post)
+  end
+
   def friendship_with(user)
     Friendship.find_by("user_a_id = ? OR user_b_id = ?", user.id, user.id)
   end

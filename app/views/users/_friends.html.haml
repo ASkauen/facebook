@@ -1,2 +1,3 @@
-- user.friends.each do |friend|
-  = render "users/user", user: friend
+.mx-3{id: "friends#{user.id}"}
+  - user.friends.each do |friend|
+    = render "users/user", user: friend

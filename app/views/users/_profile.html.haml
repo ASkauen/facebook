@@ -13,5 +13,7 @@
   .text-center.text-4xl.font-medium.text-gray-700.mt-5
     = user.full_name
   .text-center.mt-7
-    = render "users/buttons/add_remove_friend", user: user, sender: current_user
+    - if user != current_user
+      #friendship-button
+        = render "users/buttons/add_remove_friend"
 
