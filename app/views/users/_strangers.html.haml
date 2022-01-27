@@ -5,3 +5,5 @@
     - strangers.each do |stranger|
       %div
         = render "users/user", user: stranger
+  .text-center.text-blue-400.italic.hover:text-blue-500
+    = link_to "More...", users_path

@@ -13,17 +13,20 @@ application.register("friendship-button", FriendshipButtonController)
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
 
+import InputController from "./input_controller.js"
+application.register("input", InputController)
+
 import LikeButtonController from "./like_button_controller.js"
 application.register("like-button", LikeButtonController)
 
 import NotificationsController from "./notifications_controller.js"
 application.register("notifications", NotificationsController)
 
-import PostController from "./post_controller.js"
-application.register("post", PostController)
-
 import RevealForController from "./reveal_for_controller.js"
 application.register("reveal-for", RevealForController)
 
 import ShowMoreController from "./show_more_controller.js"
 application.register("show-more", ShowMoreController)
+
+import VisibilityController from "./visibility_controller.js"
+application.register("visibility", VisibilityController)

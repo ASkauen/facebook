@@ -1,3 +1,3 @@
-= form_with scope: :post, url: posts_path, class: "mt-5 grid", data: {controller: "post", action: "turbo:submit-end->post#clearInput"} do |f|
-  = f.text_area :body, placeholder: "Write something...", class: "w-full p-3 h-16 border-2 border-gray-200 rounded-md"
+= form_with scope: :post, url: posts_path, class: "mt-5 grid", data: {controller: "input", action: "turbo:submit-end->input#clear"} do |f|
+  = f.text_area :body, placeholder: "Write something...", class: "w-full p-3 h-16 border-2 border-gray-200 rounded-md", data: {input_target: "input"}
   = f.submit "Post", class: "bg-blue-400 hover:bg-blue-500 cursor-pointer w-1/3 rounded mt-2 mx-auto text-white text-3xl font-medium", id: "submit", data: {disable_with: false}

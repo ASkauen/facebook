@@ -8,13 +8,23 @@ class FriendRequestsController < ApplicationController
   end
 
   def destroy
-    request = FriendRequest.find(params[:id])
-    request.destroy
+    request = FriendRequest.find(params[:id]) rescue nil
+    if request
+      request.destroy
+    else
+      flash[:alert] = "Request does not exist"
+      redirect_to root_path
+    end
   end
 
   def accept
-    request = FriendRequest.find(params[:id])
-    Friendship.create!(friend_a: request.sender, friend_b: request.recipient)
-    request.destroy
+    request = FriendRequest.find(params[:id]) rescue nil
+    if request
+      Friendship.create!(friend_a: request.sender, friend_b: request.recipient)
+      request.destroy
+    else
+      flash[:alert] = "Could not accept request"
+      redirect_to root_path
+    end
   end
 end

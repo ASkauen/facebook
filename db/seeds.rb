@@ -11,3 +11,7 @@
   user.set_avatar("https://i.pravatar.cc/150?u=#{user.email}")
   puts "Created user #{user.full_name}"
 end
+
+User.all.each do |u|
+  u.posts.build(body: Faker::Lorem.word).save
+end

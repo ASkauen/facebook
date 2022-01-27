@@ -2,15 +2,20 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="show-more"
 export default class extends Controller {
-  toggleLikers(){
-    let likers = document.getElementById("likers")
-    let likersButton = document.getElementById("likers-button")
-    likers.classList.toggle("h-10")
+  static values = {
+    height: String,
+    id: String
+  }
+
+  expandDiv(){
+    let divToExpand = document.getElementById(`expandable${this.idValue}`)
+    let showMoreButton = document.getElementById(`show-more-button${this.idValue}`)
+    divToExpand.classList.toggle(this.heightValue)
     this.element.classList.toggle("shadow-blur-over")
-    if(likersButton.textContent.trim() == "Show more..."){
-      likersButton.textContent = "Show less..."
+    if(showMoreButton.textContent.trim() == "Show more..."){
+      showMoreButton.textContent = "Show less..."
     }else{
-      likersButton.textContent = "Show more..."
+      showMoreButton.textContent = "Show more..."
     }
   }
 }

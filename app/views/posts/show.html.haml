@@ -10,14 +10,9 @@
       = heroicon "trash", options: {class: "h-5 hover:text-red-600"}
   .text-lg.text-gray-700.border-b
     = @post.body
+  = turbo_stream_from "comments"
+  = turbo_stream_from "likers"
   = render "posts/buttons/like", post: @post
-  - if @post.likers.any?
-    .text-md.text-gray-600
-      Likers:
-    #likers.h-10.truncate.-my-3
-      - @likers.each do |l|
-        .text-sm
-          = link_to l.first_name, l, class: "hover:underline"
-    - if @post.likers.count > 2
-      #likers-button.shadow-blur-over.text-sm.text-blue-400.cursor-pointer.hover:text-blue-600{data: {controller: "show-more", action: "click->show-more#toggleLikers"}}
-        Show more...
+  = render "posts/likers", post: @post
+  = render "comments/form", commentable: @post
+  = render "comments/for_commentable", commentable: @post

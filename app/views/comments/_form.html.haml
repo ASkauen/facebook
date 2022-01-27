@@ -1,0 +1,9 @@
+- is_post = commentable.is_a?(Post)
+= form_with url: comments_path, scope: :comment, method: :post, data: {controller: "input", action: "turbo:submit-end->input#clear"} do |f|
+  .inline-flex.w-full.flex-col.gap-2
+    = f.hidden_field (commentable.class.name.downcase + "_id").to_sym, value: commentable.id
+    = f.text_area :body,
+    class: "border rounded px-3 col-start-2 h-10 w-1/2 mx-auto text-sm",
+    placeholder: "#{is_post ? " Add comment..." : "Reply..."}",
+    data: {input_target: "input"}
+    = f.submit "#{is_post ? "Comment" : "Reply"}", class: "w-max px-1 mx-auto rounded text-white bg-blue-300 hover:bg-blue-400 cursor-pointer"

@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'users/sessions' }
-  resources :users, only: [:show, :update]
-  resources :posts
+  resources :users, only: [:show, :update, :index]
+  resources :posts do
+    resources :comments
+  end
+  resources :comments do
+    resources :comments
+  end
   resources :likes, only: [:create, :destroy]
   resources :friendships, only: [:destroy]
   resources :friend_requests, only: [:create, :destroy] do

@@ -1,0 +1,3 @@
+.grid.grid-rows-auto.gap-2{id: "comments#{commentable.id}"}
+  - commentable.comments.each do |c|
+    = render "comments/comment", comment: c

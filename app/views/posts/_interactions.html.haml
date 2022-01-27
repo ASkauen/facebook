@@ -1,4 +1,10 @@
 %div
   = turbo_stream_from "likers"
+  = turbo_stream_from "comments"
   = render "posts/likers", post: post
   = render "posts/buttons/like", post: post
+  .text-gray-600.text-sm.text-center.border-b.mb-2
+    Comments
+  .max-h-52.overflow-y-auto
+    = render "comments/for_commentable", commentable: post
+  = render "comments/form", commentable: post

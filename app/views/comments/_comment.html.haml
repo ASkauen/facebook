@@ -1,0 +1,20 @@
+- author = comment.author
+%div{data:{controller: "visibility"}}
+  .text-sm.grid.grid-rows-auto.w-full.rounded-3xl.border.px-3.py-2.gap-1{id: "comment#{comment.id}"}
+    .inline-flex.gap-1
+      = link_to author, class: "inline-flex min-w-max items-start gap-1 hover:underline" do
+        = image_tag url_for(author.avatar_thumbnail("24")), class: "rounded-md"
+        #{author.first_name}:
+      .break-all
+        = comment.body
+    .inline-flex.gap-2
+      .text-blue-400.cursor-pointer.self-center.hover:text-blue-500{data:{action: "click->visibility#toggle"}}
+        Reply
+      = link_to comment_path(comment), method: :delete, class: "self-center", data: {controller: "reveal-for", "reveal-for-id-value": comment.author.id} do
+        = heroicon "trash", options: {class: "h-4 text-gray-600 hover:text-red-600"}
+  .hidden{data: {visibility_target: "toggle"}}
+    = render "comments/form", commentable: comment
+- if comment.comments.any?
+  .flex.w-full.pt-2.border-l-2.border-gray-300
+    .flex-grow.ml-3
+      = render "comments/for_commentable", commentable: comment

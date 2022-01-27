@@ -1,0 +1,10 @@
+.text-4xl.text-center.italic.font-medium.text-blue-400.mt-20.mb-3
+  All users:
+.mx-auto.grid.grid-rows-auto.gap-2{class: "w-1/3"}
+  - @users.each do |u|
+    .border-b.px-2.py-1.grid.grid-rows-auto.bg-white.rounded-sm.shadow-sm
+      = futurize "users/user", user: u, extends: :div do
+        .text-center.py-2
+          loading...
+      .justify-self-end.my-2
+        = futurize "users/buttons/add_remove_friend", user: u, extends: :div

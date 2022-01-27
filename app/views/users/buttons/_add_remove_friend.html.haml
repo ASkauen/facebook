@@ -1,17 +1,26 @@
-- if @friendship
-  = link_to "Remove friend", friendship_path(@friendship), method: :delete
-- else
-  - if @friend_request
-    - if @friend_request.sender != @user
-      = link_to "Cancel friend request", friend_request_path(@friend_request), method: :delete, class: "px-3 py-1 text-gray-500 bg-gray-200 rounded shadow"
-    - elsif @friend_request.sender == @user
-      %div
-        .text-md.flex-grow.text-center
-          wants to be friends
-        .inline-flex.mx-auto
-          = link_to "Accept", accept_friend_request_path(id: @friend_request, user: @user), method: :post,
-                    class: "bg-blue-400 text-white px-2 rounded hover:bg-blue-500 mx-3"
-          = link_to "Decline", friend_request_path(@friend_request), method: :delete,
-                    class: "bg-gray-300 text-white px-2 rounded hover:bg-gray-400"
-  - else
-    = link_to "Add friend", friend_requests_path(id: @user), method: :post, class: "bg-blue-400 px-3 py-2 text-white rounded shadow"
+%div{data:{controller: "friendship-button"}}
+  %div{class: "#{"hidden" unless current_user.friends_with?(user)}", data: {friendship_button_target: "remove"}}
+    = link_to "Remove friend", friendship_path(id: current_user.friendship_with(user) || "e"), method: :delete,
+    data:{action: "click->friendship-button#showAdd"}
+  %div{class: "#{"hidden" unless current_user.request_recipients.include?(user.id)}", data: {friendship_button_target: "cancel"}}
+    = link_to "Cancel friend request", friend_request_path(current_user.request_to(user) || "e"), method: :delete,
+      class: "px-3 py-1 text-gray-500 bg-gray-200 rounded shadow",
+      data:{action: "click->friendship-button#showAdd"}
+  %div{class: "#{"hidden" unless current_user.request_senders.include?(user.id)}", data: {friendship_button_target: "respond"}}
+    .text-md.flex-grow.text-center
+      wants to be friends
+    .inline-flex.mx-auto
+      = link_to "Accept", accept_friend_request_path(id: current_user.request_from(user) || "e"), method: :post,
+                data: {action: "click->friendship-button#showAccepted"},
+                class: "bg-blue-400 text-white px-2 rounded hover:bg-blue-500 mx-3"
+      = link_to "Decline", friend_request_path(id: current_user.request_from(user) || "e"), method: :delete,
+                data: {action: "click->friendship-button#showAdd"},
+                class: "bg-gray-300 text-white px-2 rounded hover:bg-gray-400"
+  %div{class: "#{"hidden" if current_user.friends_with?(user) || current_user.request_with(user)}", data:{friendship_button_target: "add"}}
+    = link_to "Add friend", friend_requests_path(id: user), method: :post,
+    class: "bg-blue-400 px-3 py-2 text-white rounded shadow",
+    data:{action: "click->friendship-button#showSent"}
+  .hidden.text-gray-600{data:{friendship_button_target: "sent"}}
+    Request sent
+  .hidden.text-gray-600{data:{friendship_button_target: "accepted"}}
+    You are now friends

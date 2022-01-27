@@ -1,7 +1,7 @@
 %div{data:{controller: "like-button", action: "click->like-button#toggle", like_button_post_value: post.id, like_button_likers_value: post.likers.pluck(:id)}}
   %div{class: "hidden", id: "unlike#{post.id}"}
     = link_to like_path(id: "nil", post: post), method: :delete do
-      %i #{heroicon "thumb-up", options: {class: "h-4 text-blue-500"}}
+      %i #{heroicon "thumb-up", options: {class: "h-5 text-blue-500"}}
   %div{class: "hidden", id: "like#{post.id}"}
     = link_to likes_path(post: post), method: :post do
-      %i #{heroicon "thumb-up", options: {class: "h-4 text-gray-500"}}
+      %i #{heroicon "thumb-up", options: {class: "h-5 text-gray-500"}}

@@ -26,6 +26,8 @@ class User < ApplicationRecord
     set_avatar
   end
 
+  after_update {broadcast_update_to "user_bio", partial: "users/bio", target: "bio#{id}", locals: {user: self}}
+
   def friends_with?(user)
     friends.include?(user)
   end
@@ -60,6 +62,10 @@ class User < ApplicationRecord
   
   def request_from(user)
     received_friend_requests.find_by(sender: user)
+  end
+
+  def request_with(user)
+    FriendRequest.find_by(recipient: self, sender: user) || FriendRequest.find_by(recipient: user, sender: self)
   end
 
   def request_recipients
