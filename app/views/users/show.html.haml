@@ -1,15 +1,15 @@
 .bg-white.my-36.mx-auto.rounded.shadow-lg.border-2.border-blue-300{class: "w-1/2"}
   .bg-gray-50.border-b-2.border-gray-300
     = render "profile", user: @user
-  .flex.mb-5
-    .w-80
+  .grid.grid-cols-3.mb-5
+    .w-fit-content
       .text-2xl.font-medium.text-center.mt-10
         Friends
       = turbo_stream_from "friends"
-      = render "friends", user: @user
-    .flex-grow.mx-20
+      = futurize "users/friends", user: @user, extends: :div
+    .col-span-2.mx-10
       %div{class: "w-2/3 mx-auto"}
         = render "posts/new" if @user == current_user
       .mb-5
         = turbo_stream_from "posts"
-        = render "posts/posts", posts: @user.posts.order_desc, user: current_user
+        = futurize "posts/posts", posts: @user.posts.order_desc, user: current_user, extends: :div

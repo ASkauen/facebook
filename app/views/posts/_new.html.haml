@@ -1,3 +1,12 @@
 = form_with scope: :post, url: posts_path, class: "mt-5 grid", data: {controller: "input", action: "turbo:submit-end->input#clear"} do |f|
-  = f.text_area :body, placeholder: "Write something...", class: "w-full p-3 h-16 border-2 border-gray-200 rounded-md", data: {input_target: "input"}
+  .inline-flex
+    = f.text_area :body, placeholder: "Write something...", class: "w-full p-3 h-16 border-2 border-gray-200 rounded-md", data: {input_target: "input"}
+    = f.file_field :image, hidden: true, data: {input_target: "file", action: "change->input#showFilename"}, accept: "image/png, image/gif, image/jpeg"
+    = f.label :image, class: "self-center ml-2 cursor-pointer" do
+      %i #{heroicon "photograph", options:{class: "h-7 text-blue-400 hover:text-blue-500"}}
+  #file.hidden.mx-auto
+    .bg-blue-200.rounded.text-center.text-gray-600.text-sm.w-max.mx-auto.px-2.mt-2.inline-flex.gap-2.items-center
+      #file-name
+      .cursor-pointer{data:{action:"click->input#replaceFileInput"}}
+        = heroicon "x", options:{class: "h-4 text-gray-600 hover:text-red-400"}
   = f.submit "Post", class: "bg-blue-400 hover:bg-blue-500 cursor-pointer w-1/3 rounded mt-2 mx-auto text-white text-3xl font-medium", id: "submit", data: {disable_with: false}

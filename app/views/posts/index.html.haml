@@ -1,7 +1,8 @@
 = turbo_stream_from "posts"
 
 .grid.grid-cols-3.mb-5
-  %div
+  %div#trending
+    = render "posts/trending", posts: @trending
   %div
     = render 'new'
     = render "posts", posts: @posts.order_desc

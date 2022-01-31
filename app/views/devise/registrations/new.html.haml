@@ -2,7 +2,7 @@
   %h2.text-4xl.font-bold.text-white Sign up
   %hr.my-2
   = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-    = render "devise/shared/error_messages", resource: resource
+    = devise_error_messages!
     .field
       = f.label :first_name, class: "text-white font-medium text-xl"
       %br/

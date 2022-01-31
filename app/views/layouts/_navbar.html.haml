@@ -1,6 +1,6 @@
 .fixed.bg-blue-400.w-full.h-16.inline-flex.items-center.px-4.shadow.top-0.z-10
   .text-white.text-5xl.font-medium.italic.flex-grow
-    = link_to "Fåcebook", root_path
+    = link_to "Fakebook", root_path
   - if user_signed_in?
     - notifs = current_user.notifications
     = render "users/notifications", recipient: current_user, enable: notifs.any?
@@ -8,6 +8,6 @@
       = link_to "Sign out", destroy_user_session_path, method: :delete
     = link_to user_path(current_user) do
       .flex.gap-2
-        = image_tag(url_for(current_user.avatar_thumbnail))
+        = image_tag url_for(current_user.avatar_thumbnail), class: "rounded"
         .text-white.text-2xl.font-medium.self-end
           = current_user.first_name

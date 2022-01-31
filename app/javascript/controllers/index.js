@@ -25,8 +25,5 @@ application.register("notifications", NotificationsController)
 import RevealForController from "./reveal_for_controller.js"
 application.register("reveal-for", RevealForController)
 
-import ShowMoreController from "./show_more_controller.js"
-application.register("show-more", ShowMoreController)
-
 import VisibilityController from "./visibility_controller.js"
 application.register("visibility", VisibilityController)

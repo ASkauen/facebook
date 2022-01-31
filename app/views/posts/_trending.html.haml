@@ -1,0 +1,21 @@
+.grid.grid-rows-auto.px-3.py-2.rounded.mt-48.border.shadow.bg-white.mx-auto{class: "w-2/3"}
+  .text-4xl.font-medium.italic.text-blue-500.text-center.border-b.border-blue-200
+    Trending
+  .grid.grid-rows-auto.mt-3.gap-2
+    - posts.each do |post|
+      .p-2.rounded.shadow
+        .inline-flex.w-full
+          = link_to user_path(post.author), class: "inline-flex items-center gap-3 border-b w-max hover:underline" do
+            = image_tag url_for(post.author.avatar_thumbnail("24")), class: "rounded"
+            .text-gray-700
+              #{post.author.full_name}
+          .flex-grow
+          = link_to post do
+            = heroicon "external-link", options: {class: "h-5 text-gray-500 hover:text-gray-700"}
+        .text-md.text-gray-700.break-all.mx-4.my-2.max-h-36.overflow-hidden
+          = post.body
+        .inline-flex.gap-2.text-sm
+          .italic.text-gray-600
+            #{post.likes.count} likes
+          .italic.text-gray-600
+            #{post.comments_and_replies.count} comments

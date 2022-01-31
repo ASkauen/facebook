@@ -9,6 +9,10 @@ class Like < ApplicationRecord
                         partial: "posts/likers",
                         target: "likers#{post.id}",
                         locals: {post: post}
+    broadcast_append_to "likers_full",
+                        partial: "posts/liker",
+                        target: "likers#{post.id}",
+                        locals: {user: user}
   end
 
   after_destroy do
@@ -17,6 +21,8 @@ class Like < ApplicationRecord
                           partial: "posts/likers",
                           target: "likers#{post.id}",
                           locals: {post: post}
+      broadcast_remove_to "likers_full",
+                          target: user
     end
   end
 end

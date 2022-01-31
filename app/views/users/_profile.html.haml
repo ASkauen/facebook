@@ -2,7 +2,7 @@
   .inline-flex.w-full.justify-center
     - if user == current_user
       = form_with url: update_avatar_path, method: :patch, data: {controller: "avatar"}, id: "avatar-form" do |f|
-        = f.file_field :avatar, hidden: true, data: {action: "change->avatar#Submit"}
+        = f.file_field :avatar, hidden: true, data: {action: "change->avatar#Submit"}, accept: "image/png, image/gif, image/jpeg"
         = f.label :avatar, class: "pointer-events-none" do
           .group.cursor-pointer.rounded-full.pointer-events-auto
             #{image_tag url_for(user.avatar_thumbnail("96")), class: "rounded-full justify-self-center border-2 border-blue-300"}
@@ -24,7 +24,7 @@
       = form_with model: user, class: "hidden", data:{controller: "input", visibility_target: "toggle"} do |f|
         = f.text_area :bio, class: "text-center w-full px-2", data:{input_target: "input"}
         %br
-        = f.submit "Save", class: "bg-blue-400 text-white px-2 rounded", data:{action: "click->visibility#toggle"}
+        = f.submit "Save", class: "bg-blue-400 text-white px-2 rounded cursor-pointer", data:{action: "click->visibility#toggle"}
   .text-center.mt-7
     - if user != current_user
       #friendship-button
