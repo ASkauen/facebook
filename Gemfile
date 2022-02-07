@@ -72,10 +72,12 @@ gem "devise", "~> 4.8"
 
 gem "hotwire-rails", "~> 0.1.3"
 
-gem "omniauth-facebook", "~> 9.0"
+gem "omniauth-facebook"
 
-gem "omniauth-rails_csrf_protection", "~> 1.0"
+gem "omniauth-rails_csrf_protection"
 
 gem "down"
 
 gem "heroicon", "~> 0.4.0"
+
+gem 'figaro'

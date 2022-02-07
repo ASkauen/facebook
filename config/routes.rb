@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { sessions: 'users/sessions' }
+  devise_for :users
   resources :users, only: [:show, :update, :index]
   resources :posts do
     resources :comments
@@ -13,6 +13,5 @@ Rails.application.routes.draw do
     post "/accept", to: "friend_requests#accept", on: :member
   end
   root 'posts#index'
-  get "/auth/facebook/callback", to: "omniauth#facebook"
   patch "/update_avatar/:id", to: "users#update_avatar", as: "update_avatar"
 end
