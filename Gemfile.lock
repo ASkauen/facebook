@@ -181,6 +181,10 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     jwt (2.3.0)
+    launchy (2.5.0)
+      addressable (~> 2.7)
+    letter_opener (1.7.0)
+      launchy (~> 2.2)
     listen (3.7.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -235,6 +239,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-mini-profiler (2.3.3)
       rack (>= 1.2.0)
     rack-protection (2.1.0)
@@ -368,11 +374,13 @@ DEPENDENCIES
   hotwire-rails (~> 0.1.3)
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
+  letter_opener
   listen (~> 3.3)
   omniauth-facebook
   omniauth-rails_csrf_protection
   pg (~> 1.1)
   puma (~> 5.0)
+  rack-cors
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4, >= 6.1.4.4)
   redis (~> 4.0)

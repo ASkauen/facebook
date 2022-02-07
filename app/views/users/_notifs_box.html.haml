@@ -1,9 +1,12 @@
-.absolute.right-16.top-14.w-max.bg-white.border.max-h-96.overflow-y-auto
-  - if recipient.notifications.any?
-    #notifications.grid.grid-rows-auto.gap-2.p-2
-      - recipient.notifications.each do |notif|
-        - if notif.class == FriendRequest
-          = render "users/friend_request", fr: notif
-  - else
-    .w-80.py-10.text-center.text-gray-400
-      No notifications
+.absolute.right-16.top-14.w-max
+  .bg-white.border.max-h-96.overflow-y-auto
+    - if recipient.notifications.any?
+      #notifications.grid.grid-rows-auto.gap-2.p-2
+        - recipient.notifications.each do |notif|
+          - if notif.class == FriendRequest
+            = render "users/friend_request", fr: notif
+    - else
+      .w-80.py-10.text-center.text-gray-400
+        No notifications
+  .bg-blue-200
+    = link_to "Generate Friend Request", generate_friend_requests_path, method: :post
