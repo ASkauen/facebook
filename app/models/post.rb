@@ -1,3 +1,6 @@
+include ActionView::Helpers::DateHelper
+
+
 class Post < ApplicationRecord
   belongs_to :author, class_name: "User", foreign_key: 'user_id'
   has_many :likes, dependent: :destroy
@@ -12,6 +15,10 @@ class Post < ApplicationRecord
 
   after_create_commit {broadcast_prepend_to "posts", target: "posts"}
   after_destroy_commit {broadcast_remove_to "posts", target: self}
+
+  def time_ago
+    time_ago_in_words(created_at) + " ago"
+  end
   
   def comments_and_replies
     out = []

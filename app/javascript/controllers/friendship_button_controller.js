@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="friendship-button"
 export default class extends Controller {
-  static targets = [ "add", "remove", "sent", "cancel", "respond"]
+  static targets = [ "add", "remove", "sent", "cancel", "respond", "accepted"]
 
   showAdd() {
     this.addTarget.classList.remove("hidden")
