@@ -27,4 +27,8 @@ class FriendRequestsController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def generate
+    current_user.generate_friend_request
+  end
 end
